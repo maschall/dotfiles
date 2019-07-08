@@ -1,0 +1,145 @@
+source "$DIRECTORY/.git-completion.bash"
+source "$DIRECTORY/.hub-completion.bash"
+
+alias c="git commit"
+alias s="git status"
+alias d="git diff"
+alias fetch='git fetch --prune'
+alias fap='fetch --all --prune'
+alias b='git branch'
+__git_complete b _git_branch
+alias stsh='git stash'
+alias unstsh='git stash pop'
+alias reset='git reset --hard'
+alias clean='git clean -xdf'
+alias log='git log'
+alias cb='checkout'
+__git_complete cb _git_checkout
+alias lb='last_branch'
+alias m='cb master'
+alias undo='git checkout --'
+
+function upstream_or_master {
+  if git ls-remote upstream 2>/dev/null 1>/dev/null; then
+    REMOTE='upstream'
+  else
+    REMOTE='origin'
+  fi
+}
+
+function f {
+  upstream_or_master
+  git fetch ${REMOTE}
+}
+
+function merge_from_github {
+	current_branch=$(git rev-parse --abbrev-ref HEAD);
+	upstream_or_master
+  git merge ${REMOTE}/${current_branch}
+}
+
+function update {
+  f;merge_from_github;
+}
+
+function checkout {
+  git checkout "$@"
+}
+__git_complete checkout _git_checkout
+
+function last_branch {
+	checkout -
+}
+
+function mkb {
+  params=(${1//\// })
+  numParams=${#params[@]}
+  if [ ${numParams} -eq 1 ]; then
+    checkout -b ${params[0]}
+  elif [ ${numParams} -gt 1 ]; then
+    branchName=${1//origin\//}
+    checkout -b $branchName $1
+  fi
+}
+__git_complete mkb _git_checkout
+
+function rebase {
+	last_branch;
+		update;
+	last_branch;
+  git rebase $LAST_BRANCH;
+}
+
+function merge {
+	last_branch;
+		update;
+  last_branch;
+	git merge $LAST_BRANCH;
+}
+
+function clone {
+  repo=$1
+
+  declare -a hosts=("git@github.com:maschall git@github.com:detroit-labs ssh://git@onsrnd1adc-st01.itlab.onstar.gm.com:7999/ig ssh://git@onsrnd1adc-st01.itlab.onstar.gm.com:7999/ios ssh://git@onsrnd1adc-st01.itlab.onstar.gm.com:7999/ag
+ssh://git@onsrnd1adc-st01.itlab.onstar.gm.com:7999/gs
+ssh://git@onsrnd1adc-st01.itlab.onstar.gm.com:7999/tran");
+
+  for host in $hosts; 
+  do
+  	git clone -q "$host/${repo}.git"
+	if [[ $? -eq 0 ]]; then
+		if [[ $# -eq 1 ]]; then
+			cd "$repo"
+		fi
+		break
+	fi
+  done
+}
+
+function clone-dl {
+  git clone git@github.com:detroit-labs/$1.git
+}
+
+function git-clone {
+  git clone git@github.com:$1/$2.git
+}
+
+function add-fork {
+  upstream_or_master
+  repo=$(basename $(git remote show -n ${REMOTE} | grep Fetch | cut -d: -f2-))
+  if [ "$#" -eq 0 ]; then
+	  echo "speficy the fork"
+    return 1
+  elif [ "$#" -eq 1 ]; then
+	  nickName=$1
+		userName=$1
+  else
+	  nickName=$1
+		userName=$2
+  fi
+	git remote add ${nickName} git@github.com:${userName}/${repo}
+	git fetch ${nickName}
+}
+
+function tag {
+	if [ "$#" -eq 0 ]; then
+		echo "tag {name} {message}?"
+	elif [ "$#" -eq 1 ]; then
+		tag=$1
+		message=$1
+	else
+		tag=$1
+		message=$2
+	fi
+	git tag -a $tag -m $message
+  upstream_or_master
+  git push ${REMOTE} $tag
+}
+
+function restore-file {
+	file=$1
+	commit=$(git rev-list -n 1 HEAD -- "$file")
+	git checkout $commit^ -- "$file"
+}
+
+alias bfg='java -jar ~/bin/bfg.jar'

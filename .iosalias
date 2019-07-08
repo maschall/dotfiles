@@ -1,0 +1,34 @@
+[ -f ~/.fastlane/completions/completion.sh ] && source ~/.fastlane/completions/completion.sh
+
+alias rcp='killall Xcode; reset; clean; pod install --repo-update; openx'
+alias pi='pod install'
+alias bi='bundle install'
+alias ds='rmdir ~/Library/Application\ Support/iPhone\ Simulator/'
+alias openx8='open -a Xcode8.app *.xcworkspace'
+alias openx='open -a Xcode.app *.xcworkspace'
+alias undo_schemes="git checkout -- *.xcodeproj/xcshareddata/xcschemes"
+alias clean_build="xcodebuild -workspace *.xcworkspace/ clean"
+
+function non-retina {
+  convert -scale 50% $1 ${1/@2x/}
+}
+
+function uuid {
+  # uuid *.mobileprovision
+  /usr/libexec/PlistBuddy -c 'Print :UUID' 2> /dev/null /dev/stdin <<< $(security cms -D -i "$1")
+}
+
+function bundle-identifier {
+  /usr/libexec/PlistBuddy -c 'Print :Entitlements:application-identifier' 2> /dev/null /dev/stdin <<< $(security cms -D -i "$1")
+}
+
+function find-mobileprovision {
+  grep -al "$1" ~/Library/MobileDevice/Provisioning\ Profiles/*
+}
+
+function repod {
+  killall Xcode
+  (cd $IDCDir; clean;)
+  (cd $IDCWorkspace; bi; podi; clean_build;)
+  openidc
+}

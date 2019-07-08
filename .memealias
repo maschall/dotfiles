@@ -1,0 +1,109 @@
+function urlencode {
+  STR=$@
+
+  echo ${STR} | sed -e 's|%|%25|g' \
+  -e 's| |%20|g' \
+  -e 's|!|%21|g' \
+  -e 's|#|%23|g' \
+  -e 's|\$|%24|g' \
+  -e 's|&|%26|g' \
+  -e "s|'|%27|g" \
+  -e 's|(|%28|g' \
+  -e 's|)|%29|g' \
+  -e 's|*|%2A|g' \
+  -e 's|+|%2B|g' \
+  -e 's|,|%2C|g' \
+  -e 's|/|%2F|g' \
+  -e 's|:|%3A|g' \
+  -e 's|;|%3B|g' \
+  -e 's|=|%3D|g' \
+  -e 's|?|%3F|g' \
+  -e 's|@|%40|g' \
+  -e 's|\[|%5B|g' \
+  -e 's|]|%5D|g'
+}
+
+function urldecode {
+  ENC_STR=$@
+  TMP_STR="$(echo ${ENC_STR} | sed -e 's/%/\\x/g')"
+  PRINTF=/usr/bin/printf
+  exec ${PRINTF} "${TMP_STR}\n"
+}
+
+function memegenerator {
+  UPPER=`urlencode $2`
+  LOWER=`urlencode $3`
+  URL="https://memegenerator.net/img-preview/Instance/PreviewInstanceData?instanceDataJson=%7B%22instanceElements%22%3A%5B%7B%22instancePicture%22%3A%7B%22imageID%22%3A$1%7D%2C%22instanceTexts%22%3A%5B%7B%22text%22%3A%22${UPPER}%22%2C%22placeholder%22%3A%22top%20text%22%2C%22horizontalAlign%22%3A%22center%22%2C%22verticalAlign%22%3A%22near%22%2C%22color%22%3A%22%23ffffff%22%7D%2C%7B%22text%22%3A%22${LOWER}%22%2C%22placeholder%22%3A%22bottom%20text%22%2C%22horizontalAlign%22%3A%22center%22%2C%22verticalAlign%22%3A%22far%22%2C%22color%22%3A%22%23ffffff%22%7D%5D%7D%5D%7D"
+  echo "${URL}#.png" | pbcopy
+  open $URL
+}
+
+function khan {
+  MESSAGE="$@"
+  memegenerator 1123022 "" $MESSAGE
+}
+
+function am-i-the-only-one {
+  MESSAGE="$@"
+  memegenerator 7971326 "am i the only one who" "gives a shit about $MESSAGE"
+}
+
+function yo-dawg {
+  MESSAGE="$@"
+  memegenerator 108785 "yo dawg, i heard you like $MESSAGE" "so i put $MESSAGE in your $MESSAGE"
+}
+
+function not-sure-if {
+  memegenerator 84688 "not sure if $1" "or $2"
+}
+
+function one-does-not-simply {
+  MESSAGE="$@"
+  memegenerator 3291562 "one does not simply" "$MESSAGE"
+}
+
+function success-kid {
+  MESSAGE="$@"
+  memegenerator 1031 "" "$MESSAGE"
+}
+
+function i-dont-always {
+  memegenerator 2485 "i don't always $1" "but when i do, $2"
+}
+
+function that-would-be-great {
+  MESSAGE="$@"
+  memegenerator 7665331 "$MESSAGE" "that would be great"
+}
+
+function brace-yourself {
+  MESSAGE="$@"
+  memegenerator 2732092 "brace yourself" "$MESSAGE"
+}
+
+function why-the-fuck {
+  MESSAGE="$@"
+  memegenerator 5959710 "why the fuck" "$MESSAGE"
+}
+
+function too-damn-high {
+  memegenerator 1999400 "$1" "too damn $2"
+}
+
+function y-u-no {
+  MESSAGE="$@"
+  memegenerator 166088 "Y U NO" "$MESSAGE"
+}
+
+function quote {
+  MESSAGE="$@"
+  memegenerator 5682950 "" "$MESSAGE"
+}
+
+function tinfoil {
+  memegenerator 12059159 "$1" "$2"
+}
+
+function philosoraptor {
+  memegenerator 984 "$1" "$2"
+}

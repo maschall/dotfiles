@@ -1,0 +1,33 @@
+export ANDROID_NDK_HOME="/usr/local/share/android-ndk"
+export ANDROID_SDK_ROOT="/Users/${USER}/Library/Android/sdk"
+export ANDROID_HOME="/Users/${USER}/Library/Android/sdk"
+
+export PATH="$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools"
+
+
+
+alias openand='open -a Android\ Studio'
+alias ga='./gradlew assembleDebug'
+alias gt='./gradlew assembleDebug testDebug'
+alias gc='./gradlew clean'
+alias gtgp='gt && git push origin HEAD'
+alias grd='./gradlew --refresh-dependencies'
+
+alias update-android='echo "y" | android update sdk -u'
+
+alias nexus='emulator -avd Nexus_5_API_22 &'
+alias nexus_charles='emulator -avd Nexus_5_API_22 -http-proxy http://10.251.1.71:8888 &'
+
+alias clearsim="adb shell pm list packages -3 | cut -d':' -f2 | tr '\r' ' ' | xargs -n1 -t adb uninstall; adb shell rm -rf /data/local/tmp"
+
+function lnglat {
+  ADDRESS="address=$@"
+	LOCATION=`curl -GsL --data-urlencode "$ADDRESS" "https://maps.googleapis.com/maps/api/geocode/xml" | xmllint --xpath '//GeocodeResponse/result[1]/geometry/location' -`
+  LAT=`echo "$LOCATION" | xmllint --xpath '//location/lat/text()' -`
+  LNG=`echo "$LOCATION" | xmllint --xpath '//location/lng/text()' -`
+  echo "${LNG} ${LAT}"
+}
+
+function geo {
+  adb emu geo fix `lnglat $@`
+}

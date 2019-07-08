@@ -1,0 +1,8 @@
+brew_install_if_missing jenv jenv "adoptopenjdk/openjdk"
+
+which jenv > /dev/null && eval "$(jenv init -)"
+
+export JAVA_HOME=$(/usr/libexec/java_home)
+
+/usr/libexec/java_home -v 1.8 > /dev/null || brew cask install adoptopenjdk8
+

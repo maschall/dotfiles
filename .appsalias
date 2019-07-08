@@ -1,0 +1,4 @@
+alias slack='open -a Slack.app'
+alias chrome='open -a Google\ Chrome.app'
+alias spotify='open -a Spotify.app'
+alias charles='open -a Charles.app'

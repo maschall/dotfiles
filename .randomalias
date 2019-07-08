@@ -1,0 +1,30 @@
+function ram_disk {
+	mntpt="$1"
+	rdsize=$(($2*1024*1024/512))
+
+	# Create the RAM disk.
+	dev=`hdid -drivekey system-image=yes -nomount ram://$rdsize`
+	# Successfull creation...
+	if [ $? -eq 0 ] ; then
+	# Create HFS on the RAM volume.
+	newfs_hfs $dev
+	# Store permissions from old mount point.
+	eval `/usr/bin/stat -s "$mntpt"`
+	# Mount the RAM disk to the target mount point.
+	mount -t hfs -o union -o nobrowse -o nodev -o noatime $dev "$mntpt"
+	# Restore permissions like they were on old volume.
+	chown $st_uid:$st_gid "$mntpt"
+	chmod $st_mode "$mntpt"
+	
+	echo "Creating RamFS for $mntpt $rdsize $dev"
+	fi
+}
+
+function unmount() {
+	mntpt="$1"
+	dev=`mount | grep "$mntpt" | grep hfs | cut -f 1 -d ' '`
+	umount -f "$mntpt"
+	hdiutil detach "$dev"
+	echo "Umount RamFS for $mntpt $dev"
+	echo ""
+}

@@ -1,0 +1,22 @@
+alias l='ls -a'
+alias ll='ls -alh'
+
+alias rmdir='rm -rf'
+alias cls='clear'
+
+function find-file-names {
+  find . -type f -name $1 | tr '\n' '\0'  | xargs -0 basename
+}
+
+alias send='rsync -razq'
+alias retrieve='rsync -razq'
+
+alias tarup='tar cvzf'
+alias tardown='tar zxvf'
+
+function forall {
+	for i in */;
+	do
+		(cd $i; $@)
+	done
+}

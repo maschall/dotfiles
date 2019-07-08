@@ -1,0 +1,46 @@
+PASSWORD='finger-fast-great-trend'
+
+function sshpass-jenkins {
+  COMMAND=$1
+  SERVER=$2
+  shift 2
+  
+  sshpass -p $PASSWORD $COMMAND "jenkins@$SERVER" $@
+}
+
+function vnc-jenkins {
+  open "vnc://jenkins:${PASSWORD}@$1"
+}
+
+function connect-to-jenkins {
+  SERVER=$1
+  
+  shift 1
+  
+  while getopts "vc" OPTION
+  do
+  	case $OPTION in
+  	  v)
+      local VNC=YES
+  		;;
+      c)
+      local COPY=YES
+      ;;
+  	esac
+  done
+  
+  shift $(($OPTIND-1))
+  OPTIND=0
+  
+  if [ "${VNC}" == "YES" ]; then
+    vnc-jenkins $SERVER $@
+  elif [ "${COPY}" == "YES" ]; then
+    sshpass-jenkins scp ${SERVER}:$@
+  else
+    sshpass-jenkins ssh $SERVER $@
+  fi
+}
+
+alias doozer="connect-to-jenkins doozer.detroitlabs.com"
+alias wembley="connect-to-jenkins Wembley.local"
+alias gobo="connect-to-jenkins Gobo.local"

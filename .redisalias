@@ -1,0 +1,6 @@
+brew_install_if_missing redis-server redis
+
+alias start-redis-background="brew services start redis"
+alias stop-redis-background="brew services stop redis"
+
+alias start-redis="redis-server /usr/local/etc/redis.conf"

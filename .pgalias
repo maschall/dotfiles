@@ -1,0 +1,30 @@
+# POSTGRESQL Aliases
+
+brew_install_if_missing psql postgres
+
+alias start-postgres-background="brew services start postgresql"
+alias stop-postgres-background="brew services stop postgresql"
+
+alias start-postgres="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
+alias stop-postgres="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
+
+# get list of tables by size
+# select table_name, pg_relation_size(quote_ident(table_name)) from information_schema.tables where table_schema = 'public' order by 2
+
+# get the list of tables by row count
+# SELECT schemaname,relname,n_live_tup FROM pg_stat_user_tables ORDER BY n_live_tup DESC;
+
+# backup
+# pg_dump -d mydb -n public --format=custom -f mydb.pgdmp
+
+function backup_pg() {
+  pg_dump -d $1 -n public -x -F c -f ${2:-backup}.pgdmp
+}
+
+function restore_pg() {
+  pg_restore -d $2 -F c -1 --no-owner $1
+}
+
+# createdb -O ownername -T originaldb newdb
+
+# https://stackoverflow.com/questions/7359827/creating-a-database-dump-for-specific-tables-and-entries-postgres

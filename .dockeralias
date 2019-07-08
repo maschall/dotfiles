@@ -1,0 +1,4 @@
+[ -f "/usr/local/opt/dvm/dvm.sh" ] || brew install dvm
+
+[ -f "/usr/local/opt/dvm/dvm.sh" ] && . "/usr/local/opt/dvm/dvm.sh"
+

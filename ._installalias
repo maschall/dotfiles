@@ -1,0 +1,35 @@
+function brew_install_if_missing {
+  command=$1
+  formula=$2
+  tap=$3
+  
+  installed=$(which $command > /dev/null; echo $?)
+  
+  if [ $installed != 0 ]; then
+    echo "INSTALLING: $command"
+    [ -n $tap ] && brew tap $tap
+    brew install $formula
+    echo "INSTALLED: $command"
+  fi
+  
+  [ $installed != 0 ]
+}
+
+function install_if_missing {
+  command=$1
+  install_command=$2
+  
+  installed=$(which $command > /dev/null; echo $?)
+  
+  if [ $installed != 0 ]; then
+    echo "INSTALLING: $command"
+    sh -c "$install_command"
+    echo "INSTALLED: $command"
+  fi
+}
+
+install_if_missing brew "/usr/bin/ruby -e \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\""
+
+
+
+
