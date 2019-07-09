@@ -20,3 +20,7 @@ function forall {
 		(cd $i; $@)
 	done
 }
+
+function du {
+  /usr/bin/du $@ | sort -rh
+}

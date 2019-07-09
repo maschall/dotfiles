@@ -1,0 +1,5 @@
+ProjectsDir=~/Projects
+
+mkdir -p "$ProjectsDir" &> /dev/null
+alias prj='cd $ProjectsDir'
+aliasifysubfolders "$ProjectsDir"

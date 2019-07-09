@@ -2,3 +2,16 @@ alias slack='open -a Slack.app'
 alias chrome='open -a Google\ Chrome.app'
 alias spotify='open -a Spotify.app'
 alias charles='open -a Charles.app'
+
+#run this if mate has issues
+mkdir -p ~/bin &> /dev/null
+PATH=$HOME/bin:$PATH
+
+ln -sf /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport ~/bin/airport &> /dev/null
+
+[ ! -d "/Applications/TextMate.app" ] && brew cask install textmate
+[ ! -d "/Applications/Visual Studio Code.app" ] && brew cask install visual-studio-code
+[ ! -d "/Applications/GitX.app" ] && brew cask install gitx
+[ ! -d "/Applications/Google Chrome.app" ] && brew cask install google-chrome
+[ ! -d "/Applications/Charles.app" ] && brew cask install charles
+

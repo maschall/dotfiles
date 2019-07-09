@@ -1,0 +1,20 @@
+function aliasifyfolder {
+  folder=$1
+  folder_name=`basename $folder`
+  [[ -d $folder ]] && alias $folder_name="cd $folder"
+}
+
+function aliasifysubfolders {
+  aliasifyfolder $1
+  for folder in $1/*
+  do
+	  aliasifyfolder $folder
+  done
+}
+
+function add-alias {
+  newAlias="$DIRECTORY/.$1alias"
+  touch "$newAlias"
+  mate -w "$newAlias"
+  ralias
+}

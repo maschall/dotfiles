@@ -1,0 +1,21 @@
+touch "$HOME/.bash_sessions_disable"
+
+function add_line_if_not_present {
+	LINE=$1
+	FILE=$2
+	grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE" || echo "$LINE" | sudo tee -a "$FILE" > /dev/null
+}
+
+add_line_if_not_present "set completion-ignore-case on" "/etc/inputrc"
+
+export PS1='\T ${PWD##*/} $(vcprompt) \$ '
+
+export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
+
+bind '"\e[A":history-search-backward'
+bind '"\e[B":history-search-forward'
+
+export HISTFILESIZE=10000
+export HISTSIZE=10000
+
+export CLICOLOR=1
