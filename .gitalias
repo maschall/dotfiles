@@ -43,7 +43,7 @@ function update {
 }
 
 function checkout {
-  git checkout "$@"
+  git checkout $@
 }
 __git_complete checkout _git_checkout
 
@@ -63,26 +63,10 @@ function mkb {
 }
 __git_complete mkb _git_checkout
 
-function rebase {
-	last_branch;
-		update;
-	last_branch;
-  git rebase $LAST_BRANCH;
-}
-
-function merge {
-	last_branch;
-		update;
-  last_branch;
-	git merge $LAST_BRANCH;
-}
-
 function clone {
   repo=$1
 
-  declare -a hosts=("git@github.com:maschall git@github.com:detroit-labs ssh://git@onsrnd1adc-st01.itlab.onstar.gm.com:7999/ig ssh://git@onsrnd1adc-st01.itlab.onstar.gm.com:7999/ios ssh://git@onsrnd1adc-st01.itlab.onstar.gm.com:7999/ag
-ssh://git@onsrnd1adc-st01.itlab.onstar.gm.com:7999/gs
-ssh://git@onsrnd1adc-st01.itlab.onstar.gm.com:7999/tran");
+  declare -a hosts=("git@github.com:maschall");
 
   for host in $hosts; 
   do
@@ -94,10 +78,6 @@ ssh://git@onsrnd1adc-st01.itlab.onstar.gm.com:7999/tran");
 		break
 	fi
   done
-}
-
-function clone-dl {
-  git clone git@github.com:detroit-labs/$1.git
 }
 
 function git-clone {
@@ -141,5 +121,3 @@ function restore-file {
 	commit=$(git rev-list -n 1 HEAD -- "$file")
 	git checkout $commit^ -- "$file"
 }
-
-alias bfg='java -jar ~/bin/bfg.jar'

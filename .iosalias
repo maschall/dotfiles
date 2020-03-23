@@ -4,8 +4,7 @@ alias rcp='killall Xcode; reset; clean; pod install --repo-update; openx'
 alias pi='pod install'
 alias bi='bundle install'
 alias ds='rmdir ~/Library/Application\ Support/iPhone\ Simulator/'
-alias openx8='open -a Xcode8.app *.xcworkspace'
-alias openx='open -a Xcode.app *.xcworkspace'
+alias openx='open -a Xcode.app *.xcworkspace || open -a Xcode.app *.xcodeproj'
 alias undo_schemes="git checkout -- *.xcodeproj/xcshareddata/xcschemes"
 alias clean_build="xcodebuild -workspace *.xcworkspace/ clean"
 
