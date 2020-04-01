@@ -54,11 +54,12 @@ function last_branch {
 function mkb {
   params=(${1//\// })
   numParams=${#params[@]}
-  if [ ${numParams} -eq 1 ]; then
-    checkout -b ${params[0]}
-  elif [ ${numParams} -gt 1 ]; then
-    branchName=${1//origin\//}
-    checkout -b $branchName $1
+  branchName=${1//origin\//}
+  
+  if [ "$branchName" = "$1" ]; then
+  	checkout -b $1
+  else
+  	checkout -b $branchName $1
   fi
 }
 __git_complete mkb _git_checkout
