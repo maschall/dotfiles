@@ -1,0 +1,13 @@
+BEAR_NOTES_LOCATION="$HOME/Library/Group Containers/9K33E3U3T4.net.shinyfrog.bear/Application Data/"
+
+alias openbearnotes='mkdir -p "$BEAR_NOTES_LOCATION" || true; open "$BEAR_NOTES_LOCATION"'
+
+function cp_bear_notes {
+	cp -r "$BEAR_NOTES_LOCATION" ${1:-.}
+}
+
+function replace_bear_notes {
+	mkdir -p "$BEAR_NOTES_LOCATION" || true
+	cp -r $1/* "$BEAR_NOTES_LOCATION" || cp -r $1 "$BEAR_NOTES_LOCATION"
+}
+
