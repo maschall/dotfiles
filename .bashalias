@@ -8,12 +8,9 @@ function add_line_if_not_present {
 
 add_line_if_not_present "set completion-ignore-case on" "/etc/inputrc"
 
-export PS1='\T ${PWD##*/} $(vcprompt) \$ '
+export PS1='${PWD##*/} $(vcprompt) \$ '
 
 export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
-
-bind '"\e[A":history-search-backward'
-bind '"\e[B":history-search-forward'
 
 export HISTFILESIZE=10000
 export HISTSIZE=10000

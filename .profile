@@ -1,4 +1,4 @@
-DIRECTORY="$( cd "$( dirname "$( readlink "${BASH_SOURCE[0]}")" )" && pwd )"
+DIRECTORY="$( cd "$( dirname "$( readlink "$0")" )" && pwd )"
 
 #PATH=/Users/mark/Projects/xcodeenv/bin/:$PATH
 #eval "$(xcenv init -)
@@ -13,11 +13,11 @@ for aliasFile in "$DIRECTORY"/.*alias; do
   source "$aliasFile"
 done
 
-shopt -s nullglob
+setopt null_glob
 for aliasFile in "$DIRECTORY"/../.*alias/.*alias; do
   source "$aliasFile"
 done
-shopt -u nullglob
+unsetopt null_glob
 
 PATH=$DIRECTORY/.bin:$PATH
 PATH=/usr/local/sbin:$PATH
