@@ -1,6 +1,6 @@
-brew_install_if_missing jenv jenv "adoptopenjdk/openjdk"
+brew_install_if_missing_delay jenv jenv "adoptopenjdk/openjdk"
 
-which jenv > /dev/null && eval "$(jenv init -)"
+which -p jenv > /dev/null && eval "$(jenv init -)"
 
 export JAVA_HOME=$(/usr/libexec/java_home)
 

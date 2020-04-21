@@ -1,20 +1,16 @@
-source "$DIRECTORY/.git-completion.bash"
-source "$DIRECTORY/.hub-completion.bash"
-
 alias c="git commit"
 alias s="git status"
 alias d="git diff"
 alias fetch='git fetch --prune'
 alias fap='fetch --all --prune'
 alias b='git branch'
-__git_complete b _git_branch
-alias stsh='git stash'
-alias unstsh='git stash pop'
+alias stash='git stash'
+alias unstash='git stash pop'
 alias reset='git reset --hard'
 alias clean='git clean -xdf'
 alias log='git log'
+alias checkout='git checkout'
 alias cb='checkout'
-__git_complete cb _git_checkout
 alias lb='last_branch'
 alias m='cb master'
 alias undo='git checkout --'
@@ -42,16 +38,11 @@ function update {
   f;merge_from_github;
 }
 
-function checkout {
-  git checkout $@
-}
-__git_complete checkout _git_checkout
-
 function last_branch {
 	checkout -
 }
 
-function mkb {
+function mkb() {
   params=(${1//\// })
   numParams=${#params[@]}
   branchName=${1//origin\//}
@@ -62,7 +53,8 @@ function mkb {
   	checkout -b $branchName $1
   fi
 }
-__git_complete mkb _git_checkout
+
+compdef _git mkb=git-checkout
 
 function clone {
   repo=$1
@@ -79,27 +71,6 @@ function clone {
 		break
 	fi
   done
-}
-
-function git-clone {
-  git clone git@github.com:$1/$2.git
-}
-
-function add-fork {
-  upstream_or_master
-  repo=$(basename $(git remote show -n ${REMOTE} | grep Fetch | cut -d: -f2-))
-  if [ "$#" -eq 0 ]; then
-	  echo "speficy the fork"
-    return 1
-  elif [ "$#" -eq 1 ]; then
-	  nickName=$1
-		userName=$1
-  else
-	  nickName=$1
-		userName=$2
-  fi
-	git remote add ${nickName} git@github.com:${userName}/${repo}
-	git fetch ${nickName}
 }
 
 function tag {

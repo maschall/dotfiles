@@ -1,25 +1,28 @@
+function brew_install_if_missing_delay {
+  command=$1
+  formula=$2
+  tap=$3
+
+  installed=$(which -p $command > /dev/null; echo $?)
+  
+  if [ $installed != 0 ]; then
+    alias $command="brew_install_if_missing $command $formula $tap; unalias $command"
+  fi
+}
+
 function brew_install_if_missing {
   command=$1
   formula=$2
   tap=$3
   
-  installed=$(which $command > /dev/null; echo $?)
-  
-  if [ $installed != 0 ]; then
-    echo "INSTALLING: $command"
-    [ -n $tap ] && brew tap $tap
-    brew install $formula
-    echo "INSTALLED: $command"
-  fi
-  
-  [ $installed != 0 ]
+  install_if_missing $command "[ -n $tap ] && brew tap $tap; brew install $formula; brew unlink $formula && brew link $formula --force"
 }
 
 function install_if_missing {
   command=$1
   install_command=$2
   
-  installed=$(which $command > /dev/null; echo $?)
+  installed=$(which -p $command > /dev/null; echo $?)
   
   if [ $installed != 0 ]; then
     echo "INSTALLING: $command"

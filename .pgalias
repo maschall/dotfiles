@@ -1,6 +1,6 @@
 # POSTGRESQL Aliases
 
-brew_install_if_missing psql postgres
+brew_install_if_missing_delay psql postgres
 
 alias start-postgres-background="brew services start postgresql"
 alias stop-postgres-background="brew services stop postgresql"

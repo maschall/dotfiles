@@ -1,4 +1,4 @@
-brew_install_if_missing convert imagemagick@6 && brew link imagemagick@6 --force
+brew_install_if_missing_delay convert imagemagick@6
 
 function jpg-me {
   for i in $1; do convert $i ${i/.png/.jpg}; git rm $i; done

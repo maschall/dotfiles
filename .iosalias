@@ -31,3 +31,6 @@ function repod {
   (cd $IDCWorkspace; bi; podi; clean_build;)
   openidc
 }
+
+#PATH=/Users/mark/Projects/xcodeenv/bin/:$PATH
+#eval "$(xcenv init -)

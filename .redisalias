@@ -1,4 +1,4 @@
-brew_install_if_missing redis-server redis
+brew_install_if_missing_delay redis-server redis
 
 alias start-redis-background="brew services start redis"
 alias stop-redis-background="brew services stop redis"
