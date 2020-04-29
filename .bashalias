@@ -6,7 +6,7 @@ function add_line_if_not_present {
 	grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE" || echo "$LINE" | sudo tee -a "$FILE" > /dev/null
 }
 
-add_line_if_not_present "set completion-ignore-case on" "/etc/inputrc"
+add_line_if_not_present "set completion-ignore-case On" "/etc/inputrc"
 
 is_zsh || export PS1='${PWD##*/} $(vcprompt) \$ '
 is_zsh || export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
