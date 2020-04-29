@@ -8,11 +8,13 @@ function add_line_if_not_present {
 
 add_line_if_not_present "set completion-ignore-case on" "/etc/inputrc"
 
-#export PS1='${PWD##*/} $(vcprompt) \$ '
-
-#export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
+is_zsh || export PS1='${PWD##*/} $(vcprompt) \$ '
+is_zsh || export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
+is_zsh || export CLICOLOR=1
+is_zsh || bind '"\e[A": history-search-backward'
+is_zsh || bind '"\e[B": history-search-forward'
 
 export HISTFILESIZE=10000
 export HISTSIZE=10000
 
-#export CLICOLOR=1
+

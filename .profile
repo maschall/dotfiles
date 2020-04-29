@@ -1,20 +1,26 @@
-#DIRECTORY="$( cd "$( dirname "$( readlink "$0")" )" && pwd )"
+[ -n "$DIRECTORY" ] || DIRECTORY="$( cd "$( dirname "$( readlink "$BASH_SOURCE[0]")" )" && pwd )"
 
 if [ -n "$SSH_TTY" ]; then
   export EDITOR='emacs'
-else
+elif [ is_osx ]; then
   export EDITOR='mate -w'
+else
+  export EDITOR='emacs'
 fi
 
 for aliasFile in "$DIRECTORY"/.*alias; do
   source "$aliasFile"
 done
 
-setopt null_glob
+is_zsh && setopt null_glob
+is_zsh || shopt -s nullglob
+
 for aliasFile in "$DIRECTORY"/../.*alias/.*alias; do
   source "$aliasFile"
 done
-unsetopt null_glob
+
+is_zsh && unsetopt null_glob
+is_zsh || shopt -u nullglob
 
 PATH=$DIRECTORY/.bin:$PATH
 PATH=/usr/local/sbin:$PATH

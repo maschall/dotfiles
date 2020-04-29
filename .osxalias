@@ -1,0 +1,8 @@
+function unquarantine() {
+	xattr -d com.apple.quarantine.directory -r $@ &> /dev/null
+	xattr -d com.apple.quarantine $@ &> /dev/null
+}
+
+function clearattributes() {
+	xattr -c -r $@ &> /dev/null
+}

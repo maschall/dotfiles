@@ -1,4 +1,14 @@
+function is_osx {
+	[[ "$OSTYPE" == "darwin"* ]]
+}
+
+function is_zsh {
+	[ -n "$ZSH_VERSION" ]
+}
+
 function brew_install_if_missing_delay {
+  is_osx || return
+
   command=$1
   formula=$2
   tap=$3
@@ -11,6 +21,8 @@ function brew_install_if_missing_delay {
 }
 
 function brew_install_if_missing {
+  is_osx || return
+
   command=$1
   formula=$2
   tap=$3
@@ -31,7 +43,7 @@ function install_if_missing {
   fi
 }
 
-install_if_missing brew "/bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)\""
+is_osx && install_if_missing brew "/bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)\""
 
 
 

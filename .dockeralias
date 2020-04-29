@@ -1,4 +1,5 @@
-[ -f "/usr/local/opt/dvm/dvm.sh" ] || brew install dvm
+if [ is_osx ]; then
+	[ -f "/usr/local/opt/dvm/dvm.sh" ] || brew install dvm
 
-[ -f "/usr/local/opt/dvm/dvm.sh" ] && . "/usr/local/opt/dvm/dvm.sh"
-
+	[ -f "/usr/local/opt/dvm/dvm.sh" ] && . "/usr/local/opt/dvm/dvm.sh"
+fi

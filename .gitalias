@@ -14,6 +14,7 @@ alias cb='checkout'
 alias lb='last_branch'
 alias m='cb master'
 alias undo='git checkout --'
+alias morediff='git diff -C20'
 
 function upstream_or_master {
   if git ls-remote upstream 2>/dev/null 1>/dev/null; then
