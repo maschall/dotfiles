@@ -27,3 +27,6 @@ PATH=/usr/local/sbin:$PATH
 
 alias pushaliases="(cd $DIRECTORY && git add -A && git commit -a -m \"$(date)\" && git push origin master)"
 alias pullaliases="(cd $DIRECTORY && git fetch origin && git reset --hard origin/master)"
+
+alias ralias="unalias -a; source ${funcsourcetrace[1]%:*}"
+alias ealias="${EDITOR} $DIRECTORY"

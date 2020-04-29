@@ -47,6 +47,3 @@ source $ZSH/oh-my-zsh.sh
 DIRECTORY="$( cd "$( dirname "$( readlink ${funcsourcetrace[1]%:*})" )" && pwd )"
 source "$DIRECTORY/.profile"
 
-alias ralias="unalias -a; source ${funcsourcetrace[1]%:*}"
-alias ealias="${EDITOR} $DIRECTORY"
-
