@@ -1,4 +1,4 @@
-if [ is_osx ]; then
+if is_osx; then
 	brew_install_if_missing_delay jenv jenv "adoptopenjdk/openjdk"
 
 	which -p jenv > /dev/null && eval "$(jenv init -)"

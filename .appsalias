@@ -1,4 +1,4 @@
-if [ is_osx ]; then
+if is_osx; then
 	alias slack='open -a Slack.app'
 	alias chrome='open -a Google\ Chrome.app'
 	alias charles='open -a Charles.app'

@@ -1,11 +1,11 @@
-[ -n "$DIRECTORY" ] || DIRECTORY="$( cd "$( dirname "$( readlink "$BASH_SOURCE[0]")" )" && pwd )"
+[ -n "$DIRECTORY" ] || DIRECTORY="$( cd "$( dirname "$( readlink "$BASH_SOURCE")" )" && pwd )"
 
 if [ -n "$SSH_TTY" ]; then
   export EDITOR='emacs'
-elif [ is_osx ]; then
+elif is_osx; then
   export EDITOR='mate -w'
 else
-  export EDITOR='emacs'
+  export EDITOR='vi'
 fi
 
 for aliasFile in "$DIRECTORY"/.*alias; do
