@@ -8,6 +8,10 @@ else
   export EDITOR='vi'
 fi
 
+for aliasFile in "$DIRECTORY"/._*alias; do
+  source "$aliasFile"
+done
+
 for aliasFile in "$DIRECTORY"/.*alias; do
   source "$aliasFile"
 done
