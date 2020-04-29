@@ -94,8 +94,9 @@ function restore-file {
 }
 
 if is_zsh; then
-	is_zsh && compdef _git mkb=git-checkout
+	compdef _git mkb=git-checkout
 else
+    :
 	#__git_complete mkb _git_checkout
 	#__git_complete cb _git_checkout
 	#__git_complete checkout _git_checkout
