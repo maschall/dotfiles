@@ -14,7 +14,7 @@ alias cb='checkout'
 alias lb='last_branch'
 alias m='cb master'
 alias undo='git checkout --'
-alias morediff='git diff -U20'
+alias morediff='git diff -U10'
 
 function upstream_or_master {
   if git ls-remote upstream 2>/dev/null 1>/dev/null; then
@@ -101,3 +101,8 @@ else
 	#__git_complete cb _git_checkout
 	#__git_complete checkout _git_checkout
 fi
+
+function new-pr-from-branch {
+	current_branch=$(git rev-parse --abbrev-ref HEAD);
+	open "https://github.com/etsy/EtsyApp/pull/new/${current_branch}"
+}

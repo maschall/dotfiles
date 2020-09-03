@@ -1,2 +1,2 @@
-alias vm='ssh mschall@mschall.vm.ny2.etsy.com'
-alias openvm='open https://www.mschall.vm.ny2.etsy.com'
+alias vm='ssh mschall@mschall.vm.dev.etsycloud.com'
+alias openvm='open https://www.mschall.vm.dev.etsycloud.com'
