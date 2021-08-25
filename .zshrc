@@ -47,3 +47,7 @@ source $ZSH/oh-my-zsh.sh
 DIRECTORY="$( cd "$( dirname "$( readlink ${funcsourcetrace[1]%:*})" )" && pwd )"
 source "$DIRECTORY/.profile"
 
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true

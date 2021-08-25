@@ -1,3 +1,5 @@
+[ -n "$DIRECTORY" ] || DIRECTORY="$( cd "$( dirname "$( readlink "$BASH_SOURCE")" )" && pwd )"
+
 function aliasifyfolder {
   folder=$1
   folder_name=`basename $folder`

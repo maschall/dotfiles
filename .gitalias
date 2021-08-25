@@ -12,7 +12,7 @@ alias log='git log'
 alias checkout='git checkout'
 alias cb='checkout'
 alias lb='last_branch'
-alias m='cb master'
+alias m='cb main || cb master'
 alias undo='git checkout --'
 alias morediff='git diff -U10'
 

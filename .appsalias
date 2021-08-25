@@ -10,7 +10,6 @@ if is_osx; then
 
 	[ ! -d "/Applications/TextMate.app" ] && brew cask install textmate
 	[ ! -d "/Applications/Visual Studio Code.app" ] && brew cask install visual-studio-code
-	[ ! -d "/Applications/GitX.app" ] && brew cask install gitx
 	[ ! -d "/Applications/Google Chrome.app" ] && brew cask install google-chrome
 	[ ! -d "/Applications/Charles.app" ] && brew cask install charles
 fi
