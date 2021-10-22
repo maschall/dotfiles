@@ -1,2 +1,5 @@
-alias vm='ssh mschall@mschall.vm.dev.etsycloud.com'
+alias vm='ssh -t mschall@mschall.vm.dev.etsycloud.com "cd development/Etsyweb; exec \$SHELL -l"'
+
+alias config-cherry-pick="ssh -t mschall@mschall.vm.dev.etsycloud.com \"cd development/Etsyweb; exec \$SHELL -l; git checkout main; git pull; git cherry-pick $(git rev-parse HEAD)\""
+
 alias openvm='open https://www.mschall.vm.dev.etsycloud.com'
