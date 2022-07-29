@@ -5,5 +5,5 @@ if is_osx; then
 
 	export JAVA_HOME=$(/usr/libexec/java_home)
 
-	/usr/libexec/java_home -v 1.8 > /dev/null || brew cask install adoptopenjdk8
+	# /usr/libexec/java_home -v 1.8 > /dev/null || brew install openjdk@8
 fi

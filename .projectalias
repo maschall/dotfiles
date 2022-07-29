@@ -1,4 +1,4 @@
-ProjectsDir=~/Projects
+ProjectsDir=~/development
 
 mkdir -p "$ProjectsDir" &> /dev/null
 alias prj='cd $ProjectsDir'

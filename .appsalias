@@ -8,8 +8,11 @@ if is_osx; then
 
 	ln -sf /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport ~/bin/airport &> /dev/null
 
-	[ ! -d "/Applications/TextMate.app" ] && brew cask install textmate
-	[ ! -d "/Applications/Visual Studio Code.app" ] && brew cask install visual-studio-code
-	[ ! -d "/Applications/Google Chrome.app" ] && brew cask install google-chrome
-	[ ! -d "/Applications/Charles.app" ] && brew cask install charles
+	[ ! -d "/Applications/TextMate.app" ] && brew install --cask textmate
+	[ ! -d "/Applications/Visual Studio Code.app" ] && brew install --cask  visual-studio-code
+	[ ! -d "/Applications/Google Chrome.app" ] && brew install --cask google-chrome
+	[ ! -d "/Applications/Charles.app" ] && brew install --cask charles
 fi
+	[ ! -d "/Applications/krisp.app" ] && brew install --cask krisp
+	
+	brew_install_if_missing_delay displayplacer displayplacer "jakehilborn/jakehilborn"
