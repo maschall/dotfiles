@@ -9,4 +9,6 @@ function clearattributes() {
 
 if is_osx; then
 	brew_install_if_missing_delay displayplacer displayplacer "jakehilborn/jakehilborn"
+
+	alias fixaudio="sudo killall coreaudiod; sudo launchctl stop com.apple.audio.coreaudiod && sudo launchctl start com.apple.audio.coreaudiod"
 fi
