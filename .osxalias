@@ -6,3 +6,7 @@ function unquarantine() {
 function clearattributes() {
 	xattr -c -r $@ &> /dev/null
 }
+
+if is_osx; then
+	brew_install_if_missing_delay displayplacer displayplacer "jakehilborn/jakehilborn"
+fi
