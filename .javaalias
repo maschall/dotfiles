@@ -3,7 +3,7 @@ if is_osx && is_macos; then
 
 	which -p jenv > /dev/null && eval "$(jenv init -)"
 
-	/usr/libexec/java_home > /dev/null || brew install openjdk
+	/usr/libexec/java_home > /dev/null || (brew install openjdk && sudo ln -sfn $HOMEBREW_PREFIX/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk)
 	
 	export JAVA_HOME=$(/usr/libexec/java_home)
 fi
