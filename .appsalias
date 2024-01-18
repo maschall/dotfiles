@@ -13,6 +13,3 @@ if is_osx; then
 	[ ! -d "/Applications/Google Chrome.app" ] && brew install --cask google-chrome
 	[ ! -d "/Applications/Charles.app" ] && brew install --cask charles
 fi
-	[ ! -d "/Applications/krisp.app" ] && brew install --cask krisp
-	
-	brew_install_if_missing_delay displayplacer displayplacer "jakehilborn/jakehilborn"
