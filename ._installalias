@@ -47,7 +47,7 @@ function install_if_missing {
   fi
 }
 
-eval "$(brew shellenv)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 is_osx && install_if_missing brew "/bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)\""
 
