@@ -38,5 +38,3 @@ alias pullaliases="(cd $DIRECTORY && git fetch origin && git reset --hard origin
 
 alias ralias="unalias -a; source ${funcsourcetrace[1]%:*}"
 alias ealias="${EDITOR} $DIRECTORY"
-
-alias fixaudio="sudo killall coreaudiod; sudo launchctl stop com.apple.audio.coreaudiod && sudo launchctl start com.apple.audio.coreaudiod"
