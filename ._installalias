@@ -2,6 +2,10 @@ function is_osx {
 	[[ "$OSTYPE" == "darwin"* ]]
 }
 
+function is_macos {
+	[[ "$(sw_vers -productVersion)" != "10."* ]]
+}
+
 function is_zsh {
 	[ -n "$ZSH_VERSION" ]
 }
@@ -43,7 +47,7 @@ function install_if_missing {
   fi
 }
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(brew shellenv)"
 
 is_osx && install_if_missing brew "/bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)\""
 

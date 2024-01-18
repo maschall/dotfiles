@@ -1,5 +1,5 @@
 if is_osx; then
 	[ -f "$HOMEBREW_PREFIX/opt/dvm/dvm.sh" ] || brew install dvm
 
-	[ -f "$HOMEBREW_PREFIX/opt/dvm/dvm.sh" ] && . "/opt/homebrew/opt/dvm/dvm.sh"
+	[ -f "$HOMEBREW_PREFIX/opt/dvm/dvm.sh" ] && . "$HOMEBREW_PREFIX/opt/dvm/dvm.sh"
 fi

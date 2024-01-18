@@ -1,9 +1,9 @@
-if is_osx; then
+if is_osx && is_macos; then
 	brew_install_if_missing_delay jenv jenv "adoptopenjdk/openjdk"
 
 	which -p jenv > /dev/null && eval "$(jenv init -)"
 
+	/usr/libexec/java_home -v 1.8 > /dev/null || brew install openjdk@8
+	
 	export JAVA_HOME=$(/usr/libexec/java_home)
-
-	# /usr/libexec/java_home -v 1.8 > /dev/null || brew install openjdk@8
 fi
