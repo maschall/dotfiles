@@ -2,6 +2,7 @@ if is_osx; then
 	alias slack='open -a Slack.app'
 	alias chrome='open -a Google\ Chrome.app'
 	alias charles='open -a Charles.app'
+	alias vscode='open -a Visual\ Studio\ Code.app'
 
 	mkdir -p ~/bin &> /dev/null
 	PATH=$HOME/bin:$PATH

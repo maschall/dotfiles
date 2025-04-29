@@ -1,0 +1,54 @@
+PrivDir="$ProjectsDir/AgentsMacOS"
+alias priv="cd $PrivDir"
+
+function cpvm {
+    vm="Mark-153-VM.local"
+    destination="${2:-Desktop}"
+    scp -r $1 schall.mark@${vm}:${destination}
+}
+
+privBuildNumberFile="$PrivDir/.git/lastBuildNumber"
+function lastPrivBuildNumber {
+    cat $privBuildNumberFile
+}
+
+function writeLastPrivBuildNumber {
+    echo $1 > $privBuildNumberFile
+}
+
+function bumpLastPrivBuildNumber {
+    buildNumber=$(lastPrivBuildNumber)
+    if [ -z "${buildNumber}" ]; then
+        buildNumber=0
+    else
+        buildNumber=$((buildNumber+1))
+    fi
+    
+    writeLastPrivBuildNumber "$buildNumber"
+    echo $buildNumber
+}
+
+function resetPrivBuildNumber {
+    writeLastPrivBuildNumber 0
+}
+
+function privVersion {
+    buildNumber=$(lastPrivBuildNumber)
+    version=12.0.7
+    
+    echo $version.$buildNumber
+}
+
+function privBuild {
+    configuration=${1:-Debug}
+    
+    bumpLastPrivBuildNumber
+    version=${2:-$(privVersion)}
+
+    ./newbuild.sh --quick -c $configuration -v $version --sign --quick
+}
+
+function copyPrivBuild {
+    version=${1:-$(privVersion)}
+    cpvm "$PrivDir/Build/$version/DelineaManagementAgent-${version}.dmg"
+}

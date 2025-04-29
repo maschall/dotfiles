@@ -1,3 +1,6 @@
+eval "$(/Users/mark.schall/.local/bin/mise activate zsh)"
+
+
 [ -f ~/.fastlane/completions/completion.sh ] && source ~/.fastlane/completions/completion.sh
 
 alias rcp='killall Xcode; reset; clean; pod install --repo-update; openx'
