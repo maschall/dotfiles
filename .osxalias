@@ -7,6 +7,11 @@ function clearattributes() {
 	xattr -c -r $@ &> /dev/null
 }
 
+function cleardns() {
+  dscacheutil -flushcache
+  sudo killall -HUP mDNSResponder
+}
+
 if is_osx; then
 	brew_install_if_missing_delay displayplacer displayplacer "jakehilborn/jakehilborn"
 

@@ -1,1 +1,14 @@
+function make-sshkey {
+    fileName=$1
 
+    ssh-keygen -t ecdsa -b 521 -N "" -f ~/.ssh/$fileName
+}
+
+function make-key-for-server {
+    server=$1
+    user=$2
+    
+    make-sshkey $server
+    
+    ssh-copy-id -i ~/.ssh/$server ${user}@${server}
+}
